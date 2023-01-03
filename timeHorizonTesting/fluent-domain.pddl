@@ -55,11 +55,11 @@
 
 (:durative-action check
 :parameters()
-:duration (<= ?duration 101)
+:duration (<= ?duration 100)
 :condition(and
-    (at start(begin))
-    (over all (>= (+ (bgvoltage) (voltage-adj)) (lb)))
-    (over all  (<= (+ (bgvoltage) (voltage-adj))(ub)))
+   (at start(begin))
+   (over all (>= (+ (bgvoltage) (voltage-adj)) (lb)))
+   (over all (<= (+ (bgvoltage) (voltage-adj)) (ub)))
    (at end (horizon))
    
    )
