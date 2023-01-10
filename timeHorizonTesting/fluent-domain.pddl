@@ -35,6 +35,8 @@
 :condition(and (at start(p))
          (at start(enable))
          (at start (is-not-decreasing))
+         ;(at start (< (voltage-adj) (ub)))
+         (at start (< (+ (bgvoltage) (voltage-adj)) (ub)))
 )
 :effect(and
 (at end(increase (voltage-adj) 1))
@@ -51,8 +53,8 @@
 :condition(and (at start(p))
         (at start(enable))
         (at start (is-not-increasing))
-        ;(at start (>= (+ (bgvoltage) (voltage-adj)) (ub)))
-        ;(over all (<= (+ (bgvoltage) (voltage-adj)) (lb)))
+        ;(at start (> (voltage-adj) (lb)))
+        (at start (> (+ (bgvoltage) (voltage-adj)) (lb)))
 )
 :effect(and
 (at end(decrease (voltage-adj) 1))
@@ -67,16 +69,12 @@
 :parameters()
 :duration (=?duration 3)
 :condition(and 
-   (at start(p))
    (at start(enable))
    (at start(is-decreasing))
 )
 :effect(and
 (at start(not (is-decreasing)))
 (at end(is-not-decreasing))
-(at start(not(p)))
-(at end(p))
-(at end(done))
 ))
 
 
@@ -85,15 +83,11 @@
 :duration (=?duration 3)
 :condition(and 
    (at start(is-increasing))
-   (at start(p))
    (at start(enable))
 )
 :effect(and
 (at end(is-not-increasing))
 (at start(not (is-increasing)))
-(at start(not(p)))
-(at end(p))
-(at end(done))
 ))
 
 ; (:durative-action voltageSame
@@ -108,6 +102,7 @@
 ; (at end(increase (var) 1))
 ; (at start(not(p)))
 ; (at end(p))
+; ;(at end (done))
 ; ))
 
 
@@ -121,6 +116,10 @@
    (<= (+ (bgvoltage) (voltage-adj)) (ub))
    (>= (+ (bgvoltage) (voltage-adj)) (lb))
    ))
+   ; (over all (and   
+   ; (<= (voltage-adj) (ub))
+   ; (>= (voltage-adj) (lb))
+   ; ))
 )
    ;(over all (>= (+ (bgvoltage) (voltage-adj)) (lb)))
    ;(over all (<= (+ (bgvoltage) (voltage-adj)) (ub)))
