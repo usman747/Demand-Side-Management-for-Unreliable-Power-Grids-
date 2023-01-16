@@ -17,18 +17,25 @@
     ;(at 5 (=(voltage-adj)20))
 
     
-    (at 1 (=(bgvoltage)22))
-    ;(at 5 ( =(bgvoltage)14)) ;does not work on less than 14 
-    (at 8 ( =(bgvoltage)14))
-    (at 12 ( =(bgvoltage)8))
-    ;(at 15 ( =(bgvoltage)9))
+     (at 1 (=(bgvoltage)22))
+    ; (at 2 (=(bgvoltage)18))
+    ; (at 3 (=(bgvoltage)22))
+    
+    ; (at 5 (=(bgvoltage)15))
+    ; (at 8 (=(bgvoltage)25))
+    
+    (at 5 ( =(bgvoltage)14)) ;does not work on less than 14 
+    ;(at 8 ( =(bgvoltage)14))
+    (at 12 ( =(bgvoltage)10))
+    ;(at 18 ( =(bgvoltage)23))
    ; (at 9 ( =(bgvoltage)18))  ;24-2-2 is ok, but 25-2-2-2will take time to 7
     ;(at 8 ( =(bgvoltage)8))
+    (at 15 (kaka))
     ;(at 7( =(bgvoltage)24))
     ;(at 8( =(bgvoltage)21))
     ;(at 9( =(bgvoltage)17))
     ;(at 8 (=(bgvoltage)10))
-   (at 20(horizon))
+   (at 30(horizon))
 )
 
 (:goal(and (done)
