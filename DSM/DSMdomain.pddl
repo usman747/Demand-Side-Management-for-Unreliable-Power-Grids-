@@ -2,6 +2,7 @@
 (:requirements
    :strips
    :fluents
+   :numeric-fluents
    :durative-actions
    :timed-initial-literals
    :constraints
@@ -17,6 +18,7 @@
 (enable) (horizon) 
 (is-decreasing)(is-increasing)
 (is-not-decreasing)(is-not-increasing)
+(peak) (off-peak) (s-action)
 )
 
 
@@ -27,6 +29,7 @@
 (lb)
 (ub)
 (var)
+(grid) (base-load)
 )
 
 ; (:action finish
@@ -80,6 +83,7 @@
 :effect(and
 (at start(not (is-decreasing)))
 (at end(is-not-decreasing))
+(at end (assign (base-load) (+ (var) (grid))))
 ))
 
 
@@ -95,16 +99,33 @@
 (at start(not (is-increasing)))
 ))
 
-; (:action action_name
-;     :parameters ()
-;     :precondition (and    
-;     (enable)
-;     (horizon)
-;     )
-;     :effect (and 
-;        (increase (var) 10)
-; )
-; )
+(:action action_name
+    :parameters ()
+    :precondition (and    
+    (enable)
+    ;(s-action)
+    ;(>= (base-load) 10)
+    (>= (base-load) 25)
+    )
+    :effect (and 
+       (increase (var) 10)
+       (done)
+)
+)
+
+(:durative-action runBaseLoad-OffPeak
+    :parameters ()
+    :duration (= ?duration 0.2)
+    :condition (and 
+        (at start (enable))
+        (at start (off-peak))
+    )
+:effect(and
+(at start  (assign (base-load) (+ (var) (grid))))
+;(increase (base-load) )
+;(at end (done))
+;(at end (s-action))
+))
 
 
 
