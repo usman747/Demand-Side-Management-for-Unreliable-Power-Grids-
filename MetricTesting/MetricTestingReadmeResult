@@ -1,0 +1,12 @@
+Metric testing was not sucessful. The planner POPF-TIF (POPF2) does not get effected by using the "metric" keyword. It follows
+the goal, it sees or runs the actions which can lead it to the goal earlier.
+
+The planner runs the action LOW as its written above LOWEST action. If I move LOWEST up then it runs, so it gets the action 
+by line-by-line execution. 
+
+Although, if and when I changed the temperature decrease effect. Say LOW decreased 5 and LOWEST 6, then the planner ran LOWEST action.
+As this action will get it to the goal more quickly. So this is how this planner works. And the "metric" directive with goal doesn't work.
+ 
+Even it doesn't work on the implicitly defined "total-time" function/fluent. I tried.
+
+
