@@ -34,7 +34,6 @@
     (at 21.0 (= (battery_soc) 21.19))
     (at 22.0 (= (battery_soc) 10.36))
 
-    (at 23.0 (= (battery_soc) 70))
     (at 24(day_ended))
 )
 
