@@ -6,8 +6,8 @@
     (is-not-increasing)
     (is-not-decreasing)
     
-    (=(lower_limit)40)
-    (=(upper_limit)100)
+    (=(lb)40)
+    (=(ub)100)
     (=(battery_soc)70)
     (=(charging_rate)20)
     (=(cheap_priority_provider)0)

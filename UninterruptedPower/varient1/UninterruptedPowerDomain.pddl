@@ -27,7 +27,7 @@
 (:functions
 (battery_soc)
 (battery-soc-fix)
-(lower_limit)(upper_limit)
+(lb)(ub)
 (charging_rate)
 (cheap_priority_provider)
 (blackouts_in_a_day)
@@ -42,9 +42,11 @@
          (at start (is-not-decreasing))
          (over all (off_peak))
          (over all (is_not_blackout))
-         (at end (<= (+ (battery_soc) (battery-soc-fix)) (upper_limit)))
+         (at end (<= (+ (battery_soc) (battery-soc-fix)) (ub)))
          ;IMP line above, other wise charges above 100,
          ;then discharges
+
+         ;(at start (< (battery-soc) (lb)))  
          ) 
 :effect(and
 (at end (increase (battery-soc-fix) 10))
@@ -68,12 +70,15 @@
          (over all (peak))
          (over all (is_not_blackout))
          (at start (>= (cheap_priority_provider) 6))
-         ;(at end (< (+ (battery_soc) (battery-soc-fix)) (upper_limit)))
+         
+         ;(at start (< (battery-soc) (lb)))
+         ;(at end (< (+ (battery_soc) (battery-soc-fix)) (ub)))
 )
 :effect(and
 (at end (increase (battery-soc-fix) 10))
 ;(increase (battery-soc-fix) (* #t (charging_rate)) )
 (at start (not(is-not-increasing)))
+;(at start (assign (battery-soc-fix) 0))
 (at end (is_increasing))
 
 ))
@@ -129,8 +134,8 @@
    (at start(begin))
    (at end (day_ended))
    (over all (and   
-   (<= (+ (battery_soc) (battery-soc-fix)) (upper_limit))
-   (>= (+ (battery_soc) (battery-soc-fix)) (lower_limit))
+   (<= (+ (battery_soc) (battery-soc-fix)) (ub))
+   (>= (+ (battery_soc) (battery-soc-fix)) (lb))
    ))
 )
 
