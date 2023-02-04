@@ -27,12 +27,13 @@
     (at 15.0 (= (battery_soc) 70))
     (at 16.0 (= (battery_soc) 70))
     (at 17.0 (= (battery_soc) 70))
+    (at 18.0 (= (battery_soc) 70))
 
-    (at 18.0 (= (battery_soc) 63.95))
-    (at 19.0 (= (battery_soc) 53.47))
-    (at 20.0 (= (battery_soc) 34.68))
-    (at 21.0 (= (battery_soc) 21.19))
-    (at 22.0 (= (battery_soc) 10.36))
+    (at 19.0 (= (battery_soc) 63.95))
+    (at 20.0 (= (battery_soc) 53.47))
+    (at 21.0 (= (battery_soc) 34.68))
+    (at 22.0 (= (battery_soc) 21.19))
+    (at 23.0 (= (battery_soc) 10.36))
 
     (at 24(day_ended))
 )
