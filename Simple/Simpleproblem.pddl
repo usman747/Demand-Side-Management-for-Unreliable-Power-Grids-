@@ -3,11 +3,9 @@
 (:init
     (begin)
     (at 0.1 (not(begin)))
-    (is-not-increasing)
-    (is-not-decreasing)
     
-    (=(lb)40)
-    (=(ub)100)
+    (=(lower_limit)40)
+    (=(upper_limit)100)
     (=(battery_soc)70)
 
     (at 1.0 (= (battery_soc) 70))
