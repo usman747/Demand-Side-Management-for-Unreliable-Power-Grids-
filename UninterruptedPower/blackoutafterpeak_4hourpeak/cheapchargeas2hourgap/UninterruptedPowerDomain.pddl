@@ -19,7 +19,7 @@
 (is_decreasing)(is_increasing)
 (is-not-decreasing)(is-not-increasing)
 (peak) (off_peak) (blackout)
-(is_not_blackout)
+(is_not_blackout) (charging_now)
 )
 
 
@@ -27,37 +27,31 @@
 (:functions
 (battery_soc)
 (battery-soc-fix)
-(lb)(ub)
+(lower_limit)(upper_limit)
 (charging_rate)
-(cheap_priority_provider)
-(blackouts_in_a_day)
+(cheap_priority_level)
+(priority_value)
 )
 
 
 (:durative-action chargeBatteryCheaply
 :parameters()
-:duration (=?duration 1)
+:duration (=?duration 0.33)
 :condition(and 
          (at start(enable))
          (at start (is-not-decreasing))
+         (at start (charging_now))
          (over all (off_peak))
          (over all (is_not_blackout))
-         (at end (<= (+ (battery_soc) (battery-soc-fix)) (ub)))
+         (at end (<= (+ (battery_soc) (battery-soc-fix)) (upper_limit)))
          ;IMP line above, other wise charges above 100,
          ;then discharges
-
-         ;(at start (< (battery-soc) (lb)))  
          ) 
 :effect(and
-(at end (increase (battery-soc-fix) 10))
-;(increase (battery-soc-fix) (* #t (charging_rate)) )
-(at end (increase (cheap_priority_provider) 1))
-
-
-;COMMENTED below, otherwise it runs releaseCharging,
-;and tries to go towards discharging
-;(at start (not(is-not-increasing)))
-;(at end (is_increasing))
+(at end (increase (battery-soc-fix) charging_rate))
+(at end (increase (cheap_priority_level) 1))
+(at start (not (charging_now)))
+(at end (charging_now))
 ))
 
 
@@ -67,19 +61,18 @@
 :condition(and 
          (at start(enable))
          (at start (is-not-decreasing))
+         (at start (charging_now))
          (over all (peak))
          (over all (is_not_blackout))
-         (at start (>= (cheap_priority_provider) 7))
-         
-         ;(at start (< (battery-soc) (lb)))
-         ;(at end (< (+ (battery_soc) (battery-soc-fix)) (ub)))
+         (at start (>= (cheap_priority_level) priority_value))
+         ;(at end (< (+ (battery_soc) (battery-soc-fix)) (upper_limit)))
 )
 :effect(and
-(at end (increase (battery-soc-fix) 10))
-;(increase (battery-soc-fix) (* #t (charging_rate)) )
+(at end (increase (battery-soc-fix) charging_rate))
 (at start (not(is-not-increasing)))
-;(at start (assign (battery-soc-fix) 0))
 (at end (is_increasing))
+(at start (not (charging_now)))
+(at end (charging_now))
 
 ))
 
@@ -87,7 +80,7 @@
 
 (:durative-action dischargeBattery
 :parameters()
-:duration (=?duration 0.5)
+:duration (=?duration 1)
 :condition(and 
         (at start(enable))
         (at start (is-not-increasing))
@@ -134,8 +127,8 @@
    (at start(begin))
    (at end (day_ended))
    (over all (and   
-   (<= (+ (battery_soc) (battery-soc-fix)) (ub))
-   (>= (+ (battery_soc) (battery-soc-fix)) (lb))
+   (<= (+ (battery_soc) (battery-soc-fix)) (upper_limit))
+   (>= (+ (battery_soc) (battery-soc-fix)) (lower_limit))
    ))
 )
 

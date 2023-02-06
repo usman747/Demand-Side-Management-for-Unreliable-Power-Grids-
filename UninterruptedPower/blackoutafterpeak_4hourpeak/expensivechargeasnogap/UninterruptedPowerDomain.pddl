@@ -50,7 +50,7 @@
 :effect(and
 (at end (increase (battery-soc-fix) charging_rate))
 (at end (increase (cheap_priority_level) 1))
-(at start (not(charging_now)))
+(at start (not (charging_now)))
 (at end (charging_now))
 
 ))
@@ -72,8 +72,9 @@
 (at end (increase (battery-soc-fix) charging_rate))
 (at start (not(is-not-increasing)))
 (at end (is_increasing))
-(at start (not(charging_now)))
+(at start (not (charging_now)))
 (at end (charging_now))
+
 ))
 
 
