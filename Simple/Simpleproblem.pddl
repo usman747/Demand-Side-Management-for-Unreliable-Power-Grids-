@@ -4,9 +4,11 @@
     (begin)
     (at 0.1 (not(begin)))
     
+    (charging_now)
     (=(lower_limit)40)
     (=(upper_limit)100)
     (=(battery_soc)70)
+    (=(charging_rate)10)
 
     (at 1.0 (= (battery_soc) 70))
     (at 2.0 (= (battery_soc) 70))

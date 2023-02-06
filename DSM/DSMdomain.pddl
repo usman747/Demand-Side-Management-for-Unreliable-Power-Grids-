@@ -15,8 +15,8 @@
 )
 
 (:predicates(complete)(begin)
-(enable) (day_ended) 
-(peak) (off_peak) (charging_now)
+(enable) (day_ended)
+ (off_peak) (charging_now)
 )
 
 
@@ -25,20 +25,20 @@
 (battery_soc)
 (battery-soc-fix)
 (lower_limit)(upper_limit)
-
+(charging_rate)
 )
 
 
 (:durative-action chargeBattery
 :parameters()
-:duration (=?duration 0.325)
+:duration (=?duration 0.33)
 :condition(and 
          (at start(enable))
          (over all (off_peak))
          (at start (charging_now))
 )
 :effect(and
-(at end (increase (battery-soc-fix) 10))
+(at end (increase (battery-soc-fix) charging_rate))
 (at start (not(charging_now)))
 (at end (charging_now))
 ))

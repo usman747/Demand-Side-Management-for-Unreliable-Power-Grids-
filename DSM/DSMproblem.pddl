@@ -8,6 +8,7 @@
     (=(lower_limit)40)
     (=(upper_limit)100)
     (=(battery_soc)70)
+    (=(charging_rate)10)
 
     
     (at 0.1 (off_peak))
@@ -30,7 +31,7 @@
     (at 17.0 (= (battery_soc) 70))
     (at 17.98 (= (battery_soc) 70))
 
-    (at 17.99 (not(off_peak)))
+    (at 17.99 (not(off_peak))) ;PEAK started
     
     (at 19.0 (= (battery_soc) 63.95))
     (at 20.0 (= (battery_soc) 53.47))
