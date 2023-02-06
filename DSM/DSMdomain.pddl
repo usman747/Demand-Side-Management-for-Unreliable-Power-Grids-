@@ -31,7 +31,7 @@
 
 (:durative-action chargeBattery
 :parameters()
-:duration (=?duration 1)
+:duration (=?duration 0.325)
 :condition(and 
          (at start(enable))
          (over all (off_peak))
