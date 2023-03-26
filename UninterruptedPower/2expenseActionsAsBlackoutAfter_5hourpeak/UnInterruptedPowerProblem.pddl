@@ -3,8 +3,6 @@
 (:init
   (begin)
   (at 0.1 (not(begin)))
-  (is-not-increasing)
-  (is-not-decreasing)
   (charging_now)
   (=(lower_limit)40)
   (=(upper_limit)100)
